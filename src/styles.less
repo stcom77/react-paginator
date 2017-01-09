@@ -1,0 +1,113 @@
+@import "variables";
+
+.pagination{
+  > * {
+    box-sizing: border-box;
+  }
+  &:extend(.clearfix all);
+  &:extend(.panel all);
+  height: 44px;
+  font-size: 0;
+  padding: 2px;
+  text-align: center;
+  font-family: "FuturaRoundCond", Helvetica, Arial, sans-serif;
+  &__item{
+    display: inline-block;
+    color: @text-light;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    line-height: 44px;
+    text-decoration: none;
+    @media screen and (max-width: @md-max) {
+      font-size: 28px;
+      padding: 0 5px;
+    }
+    &:hover:not([class*=disabled]){
+      color: @primary-color;
+    }
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &--prev, &--next{
+      color: @brand-color;
+      white-space: nowrap;
+      width: 44px;
+      height: 44px;
+      line-height: normal;
+      &:before{
+        content:'';
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        margin-left: -4px;
+      }
+    }
+    &--dots{
+      color: #989898;
+    }
+    &--prev{
+      float: left;
+    }
+    &--next{
+      float: right;
+    }
+    &.active{
+      box-shadow: inset 0 -1px @brand-color;
+      color: @brand-color;
+    }
+    &--remove{
+      @media screen and (max-width: @sm-max) {
+        display: none;
+      }
+    }
+    &--disabled{
+      color: grey;
+    }
+  }
+  &__icon{
+    vertical-align: middle;
+  }
+  &__form{
+    float: right;
+    width: 80px;
+    height: 100%;
+    margin-left: 15px;
+    padding: 10px 0;
+    background: #fafafa;
+    font-size: 16px;
+    line-height: 24px;
+
+    text-transform: uppercase;
+    @media screen and (max-width: @sm-max) {
+      width: 50px;
+      font-size: @font-md;
+    }
+  }
+  &__input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    text-align: center;
+    background: transparent;
+    cursor: auto;
+    padding: 1px;
+    &:focus{
+      &:placeholder{
+        color: transparent;
+      }
+    }
+  }
+}
+
+@icon-angle-left: "\e927";
+
+.icon-angle-left {
+  &:before {
+    content: @icon-angle-left;
+  }
+}
+
