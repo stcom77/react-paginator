@@ -42,7 +42,7 @@ class Pagination extends Component {
     if ((pageCount - 7) > 0) {
       let totalPagesToShow = 7;
       totalPagesToShow = currentPage == 1 || currentPage == pageCount ? totalPagesToShow - 2 : totalPagesToShow - 3;
-      let indL = currentPage,  indR = currentPage;
+      let indL = currentPage, indR = currentPage;
       const makeStep = () => {
         indL--;
         indR++;
