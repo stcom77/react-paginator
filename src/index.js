@@ -7,21 +7,21 @@ import styles from "./styles.less";
 
 class Pagination extends Component {
   static propTypes = {
-    currentPage: PropTypes.number.isRequired, //current page number
-    onGetPageUrl: PropTypes.func.isRequired, //callback function to get url for every page
-    pageCount: PropTypes.number.isRequired, //total pages count
-    previousLabel: PropTypes.node, //label for previous page
-    nextLabel: PropTypes.node, //label for next page
-    onPageChange: PropTypes.func, // callback on page change,
+    activeClassName: PropTypes.string, //The classname for the active page.
     breakClassName: PropTypes.string, //class name for break,
     containerClassName: PropTypes.string, //class name for container
-    pageClassName: PropTypes.string, //The classname on each page element.
-    activeClassName: PropTypes.string, //The classname for the active page.
-    previousClassName: PropTypes.string, //The classname on tag li of the previous button.
-    nextClassName: PropTypes.string,  //The classname on tag li of the next button.
+    currentPage: PropTypes.number.isRequired, //current page number
     disabledClassName: PropTypes.string, //The classname for disabled previous and next buttons.
     formClassName: PropTypes.string, //The classname for paginator form.
     formInputClassName: PropTypes.string, //The classname for input on the form.
+    nextClassName: PropTypes.string,  //The classname on tag li of the next button.
+    nextLabel: PropTypes.node, //label for next page
+    onGetPageUrl: PropTypes.func.isRequired, //callback function to get url for every page
+    onPageChange: PropTypes.func, // callback on page change,
+    pageClassName: PropTypes.string, //The classname on each page element.
+    pageCount: PropTypes.number.isRequired, //total pages count
+    previousClassName: PropTypes.string, //The classname on tag li of the previous button.
+    previousLabel: PropTypes.node, //label for previous page
   };
 
   handleInputPageNumber = () => {
@@ -107,7 +107,7 @@ class Pagination extends Component {
     return onGetPageUrl(currentPage + 1);
   };
 
-  onPageClick = (page) => (e) => {
+  onPageClick = (page) => () => {
     const { onPageChange } = this.props;
 
     if (onPageChange) {
@@ -137,23 +137,23 @@ class Pagination extends Component {
       <div className={`pagination ${containerClassName}`}>
         {currentPage == 1
           ?
-          <span className={`pagination__item pagination__item--disabled pagination__item--prev ${previousClassName}`} title="Previous Page">
-            <PrevElement previousLabel={previousLabel} />
-          </span>
+            <span className={`pagination__item pagination__item--disabled pagination__item--prev ${previousClassName}`} title="Previous Page">
+              <PrevElement previousLabel={previousLabel} />
+            </span>
           :
-          <a href={this.decreasePage()} disabled className={`pagination__item pagination__item--prev ${previousClassName} ${disabledClassName}`} title="Previous Page">
-            <PrevElement previousLabel={previousLabel} />
-          </a>
+            <a href={this.decreasePage()} disabled className={`pagination__item pagination__item--prev ${previousClassName} ${disabledClassName}`} title="Previous Page">
+              <PrevElement previousLabel={previousLabel} />
+            </a>
         }
         {currentPage == pageCount
           ?
-          <span className={`pagination__item pagination__item--disabled pagination__item--next ${nextClassName}`} title="Next Page">
+            <span className={`pagination__item pagination__item--disabled pagination__item--next ${nextClassName}`} title="Next Page">
               <NextElement nextLabel={nextLabel} />
             </span>
           :
-          <a href={this.increasePage()} disabled className={`pagination__item pagination__item--next ${nextClassName} ${disabledClassName}`} title="Next Page">
-            <NextElement nextLabel={nextLabel} />
-          </a>
+            <a href={this.increasePage()} disabled className={`pagination__item pagination__item--next ${nextClassName} ${disabledClassName}`} title="Next Page">
+              <NextElement nextLabel={nextLabel} />
+            </a>
         }
         {this.pageNumbersArray()}
         <form action="#" onSubmit={this.handleSubmitPageNumber} className={`pagination__form ${formClassName}`}>
@@ -171,7 +171,7 @@ const LeftArrow = () => {
     <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
       <path d="M1203 544q0 13-10 23l-393 393 393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z" fill="currentColor" />
     </svg>
-  )
+  );
 };
 
 const RightArrow = () => {
@@ -179,21 +179,27 @@ const RightArrow = () => {
     <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
       <path d="M1171 960q0 13-10 23l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23z" fill="currentColor" />
     </svg>
-  )
+  );
 };
 
 const PrevElement = ({ previousLabel }) => {
   if (previousLabel) {
     return previousLabel;
-  } else {
-    return <LeftArrow />
   }
+  return <LeftArrow />;
+};
+
+PrevElement.propTypes = {
+  previousLabel: PropTypes.string
 };
 
 const NextElement = ({ nextLabel }) => {
   if (nextLabel) {
     return nextLabel;
-  } else {
-    return <RightArrow />
   }
+  return <RightArrow />;
+};
+
+NextElement.propTypes = {
+  nextLabel: PropTypes.string
 };

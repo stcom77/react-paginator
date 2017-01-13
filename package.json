@@ -27,7 +27,8 @@
   ],
   "scripts": {
     "build:example": "DEV=1 NODE_ENV=development webpack --config ./examples/webpack.config.babel.js --colors",
-    "build:example:watch": "DEV=1 NODE_ENV=development webpack --config ./examples/webpack.config.babel.js --colors --watch"
+    "build:example:watch": "DEV=1 NODE_ENV=development webpack --config ./examples/webpack.config.babel.js --colors --watch",
+    "lint": "eslint *.js src"
   },
   "dependencies": {
     "react": "~15.4.1",
@@ -50,6 +51,13 @@
     "babel-preset-stage-1": "~6.16.0",
     "babel-register": "~6.18.0",
     "css-loader": "~0.25.0",
+    "eslint": "~3.12.0",
+    "eslint-import-resolver-webpack": "^0.8.0",
+    "eslint-plugin-babel": "~4.0.0",
+    "eslint-plugin-import": "~2.2.0",
+    "eslint-plugin-lodash": "~2.2.0",
+    "eslint-plugin-react": "~6.8.0",
+    "eslint-plugin-you-dont-need-lodash-underscore": "~5.0.4",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "less": "^2.6.0",
